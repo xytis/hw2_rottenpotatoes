@@ -7,11 +7,13 @@ class MoviesController < ApplicationController
   end
 
   def index
+    @highlight = nil
     @movies = Movie.all
   end
 
   def sort
     if params[:type] == 'title' or params[:type] == 'release_date'
+      @highlight = params[:type]
       @movies = Movie.find(:all, :order => params[:type])
     end
     render :index
