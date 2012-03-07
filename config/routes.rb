@@ -14,7 +14,8 @@ Rottenpotatoes::Application.routes.draw do
   #   resources :products
   resources :movies do
     collection do
-      get 'sort/:type', :action => 'sort', :type => /(\w+)/
+      get 'sort/:type', :as => 'sort', :action => 'sort', :type => /(\w+)/
+      #get 'sort'
     end
   end
   
