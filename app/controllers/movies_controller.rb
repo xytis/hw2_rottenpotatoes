@@ -14,6 +14,7 @@ class MoviesController < ApplicationController
     if params[:type] == 'title' or params[:type] == 'release_date'
       @movies = Movie.find(:all, :order => params[:type])
     end
+    render :index
   end
 
   def new
