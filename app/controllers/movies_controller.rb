@@ -11,7 +11,11 @@ class MoviesController < ApplicationController
     @highlight = params[:sort_by]
     @all_ratings = Movie.ratings
     @ratings = params[:ratings].keys unless params[:ratings].nil?
-    @movies = Movie.find(:all, :order => params[:sort_by], :conditions => {:rating => @ratings})
+    unless @ratings.nil?
+      @movies = Movie.find(:all, :order => params[:sort_by], :conditions => {:rating => @ratings})
+    else
+      @movies = Movie.find(:all, :order => params[:sort_by])
+    end
   end
 
   def new
