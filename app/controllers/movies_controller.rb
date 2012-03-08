@@ -11,11 +11,7 @@ class MoviesController < ApplicationController
     @highlight = params[:sort_by]
     @all_ratings = Movie.ratings
     @ratings = params[:ratings].keys
-    unless @ratings.empty?
-      @movies = Movie.find(:all, :order => params[:sort_by], :conditions => [ "rating IN (?)", @ratings ])
-    else
-      @movies = Movie.find(:all, :order => params[:sort_by])
-    end
+    @movies = Movie.find(:all, :order => params[:sort_by])
   end
 
   def new
