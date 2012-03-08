@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
       @highlight = params[:sort_by]
       @movies = Movie.find(:all, :order => params[:sort_by])
     else
-      @movies = Movie.all
+      @movies = Movie.find(:all, :order => params[:sort_by])
     end
     @all_ratings = Movie.ratings
   end
