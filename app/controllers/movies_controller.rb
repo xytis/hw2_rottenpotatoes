@@ -10,8 +10,12 @@ class MoviesController < ApplicationController
     params[:sort_by] = nil unless params[:sort_by] == 'title' or params[:sort_by] == 'release_date'
     @highlight = params[:sort_by]
     @all_ratings = Movie.ratings
-    @ratings = params[:ratings]
-    @movies = Movie.find(:all, :order => params[:sort_by], :conditions => [ "rating IN (?)", params[:ratings] ])
+    @ratings = params[:ratings].keys
+    unless @ratings.empty?
+      @movies = Movie.find(:all, :order => params[:sort_by], :conditions => [ "rating IN (?)", @ratings ])
+    else
+      @movies = Movie.find(:all, :order => params[:sort_by])
+    end
   end
 
   def new
