@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
     @highlight = params[:sort_by]
     @all_ratings = Movie.ratings
     @ratings = params[:ratings]
-    @movies = Movie.find(:all, :order => params[:sort_by], :conditions => [ "rating IN (?)", params[:ratings])
+    @movies = Movie.find(:all, :order => params[:sort_by], :conditions => [ "rating IN (?)", params[:ratings] ])
   end
 
   def new
