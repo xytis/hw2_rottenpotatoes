@@ -9,6 +9,7 @@ class MoviesController < ApplicationController
   def index
     @highlight = nil
     @movies = Movie.all
+    @all_ratings = Movie.ratings
   end
 
   def sort
