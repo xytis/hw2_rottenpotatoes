@@ -1,13 +1,13 @@
 -#  This file is app/views/movies/index.html.haml
 %h1= link_to "All Movies", movies_path
 
-%h2= @ratings
+%h2= @ratings.include?('PG').to_s
 
 = form_tag movies_path, :method => :get do
   Include: 
   - @all_ratings.each do |rating|
     = rating
-    = check_box_tag "ratings[#{rating}]"#, (@ratings.include?(rating)).to_s
+    = check_box_tag "ratings[#{rating}]"#, @ratings.include?(rating).to_s
   = submit_tag 'Refresh', :id => 'ratings_submit'
 
 %table#movies
