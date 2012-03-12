@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
 
   def index
     #Compare params in params and session hashes. If filling is needed, redirect_to with correct set.
-    debugger
+    #debugger
     params[:sort_by] = nil unless params[:sort_by] == 'title' or params[:sort_by] == 'release_date'
     @all_ratings = Movie.ratings
     @ratings = []
