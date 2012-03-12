@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
   end
 
   def index
+    debugger
     @all_ratings = Movie.ratings
     @saved_params = {} if @saved_params.nil?
     params[:sort_by] = nil unless params[:sort_by] == 'title' or params[:sort_by] == 'release_date'
@@ -23,6 +24,7 @@ class MoviesController < ApplicationController
       @movies = Movie.find(:all, :order => @saved_params[:sort_by], :conditions => {:rating => @ratings})
     else
       @movies = Movie.find(:all, :order => @saved_params[:sort_by])
+      @ratings = []
     end
   end
 
