@@ -18,6 +18,9 @@ class MoviesController < ApplicationController
       params[:sort_by] = session[:sort_by]
       redirect_to movies_path params
     end
+    if params[:commit] == 'Refresh'
+      session.delete(:ratings)
+    end
     if not params[:ratings].nil?
       session[:ratings] = params[:ratings] 
       @ratings = session[:ratings].keys
