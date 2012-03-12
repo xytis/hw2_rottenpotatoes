@@ -8,15 +8,14 @@ class MoviesController < ApplicationController
 
   def index
     #Compare params in params and session hashes. If filling is needed, redirect_to with correct set.
-    #debugger
+    debugger
     params[:sort_by] = nil unless params[:sort_by] == 'title' or params[:sort_by] == 'release_date'
-    @all_ratings = Movie.ratings
     @ratings = []
     if not params[:sort_by].nil?
       session[:sort_by] = params[:sort_by]
     elsif not session[:sort_by].nil?
       params[:sort_by] = session[:sort_by]
-      redirect_to movies_path params
+      redirect_to(movies_path( params )) and return
     end
     if params[:commit] == 'Refresh'
       session.delete(:ratings)
@@ -26,8 +25,10 @@ class MoviesController < ApplicationController
       @ratings = session[:ratings].keys
     elsif not session[:ratings].nil?
       params[:ratings] = session[:ratings]
-      redirect_to movies_path params
+      redirect_to( movies_path( params )) and return
     end
+
+    @all_ratings = Movie.ratings
     
     unless @ratings.empty?
       @movies = Movie.find(:all, :order => params[:sort_by], :conditions => {:rating => @ratings})
